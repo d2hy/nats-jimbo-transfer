@@ -1,0 +1,22 @@
+{
+  "name": "nats-jimbo-transfer",
+  "version": "1.0.0",
+  "description": "Transferring large files through the NATS messaging system.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/d2hy/nats-jimbo-transfer.git"
+  },
+  "keywords": [
+    "nats"
+  ],
+  "author": "Ermoshkin D.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/d2hy/nats-jimbo-transfer/issues"
+  },
+  "homepage": "https://github.com/d2hy/nats-jimbo-transfer#readme"
+}
