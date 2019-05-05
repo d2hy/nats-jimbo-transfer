@@ -1,16 +1,13 @@
 /*
- * Copyright (c) 2015-present
+ * Copyright (c) 2019-present
  *
  * See the LICENSE file at the top-level directory of this distribution
  * for licensing information.
- *
- * Removal or modification of this copyright notice is prohibited.
  */
 
 const NATS = require("nats");
 const chai = require("chai");
 const dataGeneration = require("./fixtures/dataGenerators");
-
 const NatsWritable = require("../lib/NatsWritable");
 
 const { expect } = chai;
@@ -26,7 +23,7 @@ describe("NatsWritable", () => {
         nats = NATS.connect({
             port: PORT
         });
-        natsWritable = new NatsWritable({}, nats, queue);
+        natsWritable = new NatsWritable(nats, queue);
     });
 
     it("expect constructor generate exception");
@@ -39,7 +36,6 @@ describe("NatsWritable", () => {
         // Act
         const sendFilePromise = new Promise((resolve /* , reject */) => {
             dataStream.pipe(natsWritable);
-
             resolve();
         });
         await sendFilePromise;
