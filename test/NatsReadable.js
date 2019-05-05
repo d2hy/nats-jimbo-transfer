@@ -29,7 +29,15 @@ describe("NatsReadable", () => {
         natsReadable = new NatsReadable(nats, queue);
     });
 
-    it("expect constructor generate exception");
+    it("expect constructor generate exception", () => {
+        // eslint-disable-next-line no-new
+        const createNatsReadableWithoutParams = () => { new NatsReadable(); };
+        // eslint-disable-next-line no-new
+        const createNatsReadableOneParams = () => { new NatsReadable(nats); };
+
+        expect(createNatsReadableWithoutParams).to.throw("Expected nats connection");
+        expect(createNatsReadableOneParams).to.throw("Expected nats queue");
+    });
 
     it("expect receive text data promise", async () => {
         // Arrange

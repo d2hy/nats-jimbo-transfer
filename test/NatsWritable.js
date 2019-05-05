@@ -26,7 +26,15 @@ describe("NatsWritable", () => {
         natsWritable = new NatsWritable(nats, queue);
     });
 
-    it("expect constructor generate exception");
+    it("expect constructor generate exception", () => {
+        // eslint-disable-next-line no-new
+        const createNatsWritableWithoutParams = () => { new NatsWritable(); };
+        // eslint-disable-next-line no-new
+        const createNatsWritableOneParams = () => { new NatsWritable(nats); };
+
+        expect(createNatsWritableWithoutParams).to.throw("Expected nats connection");
+        expect(createNatsWritableOneParams).to.throw("Expected nats queue");
+    });
 
     it("expect send big file promise", async () => {
         // Arrange
