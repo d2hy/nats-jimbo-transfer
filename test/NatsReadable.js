@@ -100,6 +100,69 @@ describe("NatsReadable", () => {
         // Assert
         expect(dataCount).to.be.equal(mbSize * mbCount);
     });
+
+
+    describe("unsubscribe nats connection", () => {
+        it("expect unsubscribe after destroy readable stream", async () => {
+            // Arrange
+            const dataStream = dataGeneration.streamNumbers();
+            const natsPublishPromise = dataGeneration.natsPublishPromise(dataStream, nats, queue);
+
+            // eslint-disable-next-line no-unused-vars
+            let result = "";
+            // eslint-disable-next-line no-restricted-syntax
+            for await (const chunk of natsReadable) {
+                result += chunk;
+            }
+            await natsPublishPromise;
+
+            // Act
+            natsReadable.destroy();
+
+            // Arrange
+            expect(Object.keys(natsReadable.natsConnection.subs)).to.be.lengthOf(0);
+        });
+
+        it("expect unsubscribe after emit close readable stream", async () => {
+            // Arrange
+            const dataStream = dataGeneration.streamNumbers();
+            const natsPublishPromise = dataGeneration.natsPublishPromise(dataStream, nats, queue);
+
+            // eslint-disable-next-line no-unused-vars
+            let result = "";
+            // eslint-disable-next-line no-restricted-syntax
+            for await (const chunk of natsReadable) {
+                result += chunk;
+            }
+            await natsPublishPromise;
+
+            // Act
+            natsReadable.emit("close");
+
+            // Arrange
+            expect(Object.keys(natsReadable.natsConnection.subs)).to.be.lengthOf(0);
+        });
+
+        it("expect unsubscribe after emit error readable stream", async () => {
+            // Arrange
+            const dataStream = dataGeneration.streamNumbers();
+            const natsPublishPromise = dataGeneration.natsPublishPromise(dataStream, nats, queue);
+
+            // eslint-disable-next-line no-unused-vars
+            let result = "";
+            // eslint-disable-next-line no-restricted-syntax
+            for await (const chunk of natsReadable) {
+                result += chunk;
+            }
+            await natsPublishPromise;
+
+            // Act
+            natsReadable.emit("error");
+
+            // Arrange
+            expect(Object.keys(natsReadable.natsConnection.subs)).to.be.lengthOf(0);
+        });
+    });
 });
 
 describe("binary data test", () => {
