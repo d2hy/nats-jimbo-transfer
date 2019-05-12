@@ -7,8 +7,8 @@
     "lint": "eslint ./",
     "test": "mocha --check-leaks --exit",
     "test:docker": "npm run nats-server:start && npm run test ; true && npm run nats-server:stop",
-    "nats-server:start": "docker-compose -f test/docker/cluster.yaml up -d",
-    "nats-server:stop": "docker-compose -f test/docker/cluster.yaml down"
+    "nats-server:start": "docker-compose -f test/docker/stack.yaml up -d",
+    "nats-server:stop": "docker-compose -f test/docker/stack.yaml down"
   },
   "repository": {
     "type": "git",
