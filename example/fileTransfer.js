@@ -14,7 +14,7 @@ function main() {
     if (process.argv.length < 6) {
         console.error("Too less arguments");
         console.log("Usage:");
-        console.log("node fileTrasfer.js <NATS port> <NATS queue name> <source file path> <destination file path>");
+        console.log("node fileTransfer.js <NATS port> <NATS queue name> <source file path> <destination file path>");
         process.exit(1);
     }
 

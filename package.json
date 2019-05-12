@@ -4,8 +4,11 @@
   "description": "Transferring large files through the NATS messaging system.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
-    "lint": "eslint ./"
+    "lint": "eslint ./",
+    "test": "mocha --check-leaks --exit",
+    "test:docker": "npm run nats-server:start && npm run test ; true && npm run nats-server:stop",
+    "nats-server:start": "docker-compose -f test/docker/cluster.yaml up -d",
+    "nats-server:stop": "docker-compose -f test/docker/cluster.yaml down"
   },
   "repository": {
     "type": "git",

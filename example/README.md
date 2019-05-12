@@ -3,7 +3,7 @@ Example of write to NATS queue, and read from queue to file.
 
 ### Run script
 ```bash
-node fileTrasfer.js port queue_name source_file_path destination_file_path
+node fileTransfer.js port queue_name source_file_path destination_file_path
 ```
 Parameters:
  * port - NATS port
